@@ -1,3 +1,52 @@
+## [1.8.5](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.8.4...v1.8.5) (2021-11-30)
+
+
+### Bug Fixes
+
+* build failure in Vercel ([e319901](https://github.com/pengx17/logseq-plugin-link-preview/commit/e3199017c80d080f56bcee47fba30f3f4efeb5a9))
+
+## [1.8.4](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.8.3...v1.8.4) (2021-11-25)
+
+
+### Bug Fixes
+
+* usePreventFocus dep ([75508ae](https://github.com/pengx17/logseq-plugin-link-preview/commit/75508aeb23ebd6e4889e051c92fc7d2fb7cfa6c3))
+
+## [1.8.3](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.8.2...v1.8.3) (2021-11-23)
+
+
+### Bug Fixes
+
+* clicking macro mode issue ([a0fbd4f](https://github.com/pengx17/logseq-plugin-link-preview/commit/a0fbd4f64dc43708ac347f8dfd6e8f1f8d1279cf))
+
+## [1.8.2](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.8.1...v1.8.2) (2021-11-22)
+
+
+### Bug Fixes
+
+* attempt to fix link click for macro mode ([4176d66](https://github.com/pengx17/logseq-plugin-link-preview/commit/4176d6625baa7c3aa77b1e6524b6462d7f8dd82e))
+
+## [1.8.1](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.8.0...v1.8.1) (2021-11-22)
+
+
+### Bug Fixes
+
+* prepare for publish to marketplace ([a553012](https://github.com/pengx17/logseq-plugin-link-preview/commit/a5530127847098c15376395ed449d762ba132e21))
+
+# [1.8.0](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.7.2...v1.8.0) (2021-11-22)
+
+
+### Features
+
+* use onMacroRendererSlotted API ([f281566](https://github.com/pengx17/logseq-plugin-link-preview/commit/f281566b71c32aed4c1825e55a8e8fd61ad6035f))
+
+## [1.7.2](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.7.1...v1.7.2) (2021-11-22)
+
+
+### Bug Fixes
+
+* when hovering a link,  should not lose edit focus ([81c9987](https://github.com/pengx17/logseq-plugin-link-preview/commit/81c99871a4640dbd30dd1802a6677113d1375fc6))
+
 ## [1.7.1](https://github.com/pengx17/logseq-plugin-link-preview/compare/v1.7.0...v1.7.1) (2021-09-06)
 
 

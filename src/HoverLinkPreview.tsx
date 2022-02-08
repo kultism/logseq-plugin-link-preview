@@ -5,7 +5,9 @@ import {
   LinkPreviewMetadata,
   useLinkPreviewMetadata,
 } from "./use-link-preview-metadata";
-import { getCardSize } from "./utils";
+import { getCardSize, usePreventFocus } from "./utils";
+
+import "./hovering.css";
 
 function useDebounceValue<T>(v: T, timeout: number = 50) {
   const [state, setState] = React.useState(v);
@@ -54,10 +56,14 @@ const useHoveringExternalLink = () => {
       );
     };
 
-    top.document.addEventListener("mouseenter", enterAnchorListener, true);
+    top?.document.addEventListener("mouseenter", enterAnchorListener, true);
     document.addEventListener("mouseenter", enterIframeListener, true);
     return () => {
-      top.document.removeEventListener("mouseenter", enterAnchorListener, true);
+      top?.document.removeEventListener(
+        "mouseenter",
+        enterAnchorListener,
+        true
+      );
       document.removeEventListener("mouseenter", enterIframeListener, true);
     };
   }, []);
@@ -69,7 +75,7 @@ const useAdaptViewPort = (
   anchor: HTMLAnchorElement | null
 ) => {
   React.useEffect(() => {
-    if (data && anchor) {
+    if (data && anchor && top) {
       logseq.showMainUI();
       const elemBoundingRect = anchor.getBoundingClientRect();
       const [width, height] = getCardSize(data);
@@ -103,11 +109,19 @@ export const HoverLinkPreview = () => {
     debouncedAnchor?.href,
     debouncedAnchor?.innerText
   );
-
+  usePreventFocus();
   useAdaptViewPort(data, debouncedAnchor);
 
   if (data) {
-    return <LinkCard data={data} />;
+    return (
+      <LinkCard
+        data={data}
+        // @ts-expect-error
+        href={data.url}
+        rel="noopener noreferrer"
+        target="_blank"
+      />
+    );
   }
   return null;
 };

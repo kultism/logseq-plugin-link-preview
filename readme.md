@@ -27,14 +27,23 @@ The easiest solution is to deploy your own backend to [Vercel](https://vercel.co
 - fork this plugin repository
 - import your forked repository as a new project in Vercel
 - configure it with `FRAMEWORK PRESET` to Other
-- override `INSTALL COMMAND` in Build settings to `npm i pnpm -g && pnpm i`
+- override `INSTALL COMMAND` in Build settings to `npm i pnpm -g && pnpm i` (See below)
 - click deploy. After deploy is done, you can now replace the `https://logseq-plugin-link-preview.vercel.app/` with your own backend URL.
+
+![image](https://user-images.githubusercontent.com/584378/143966444-da66cee8-f03d-44f4-8105-3545ab8aecf9.png)
+
 
 ## Demo
 
 ![](./demo.gif)
 
 ## How does this plugin work?
+
+There are two modes of this plugin:
+- Hovering mode
+- Macro mode
+
+The two modes are working very differently, but they codes are mostly shared.
 
 ### Hovering Mode
 
@@ -47,21 +56,12 @@ Once the api returns with the link metadata (e.g., title, description, image), t
 - render them in the plugin iframe
 - resize the iframe and move its position to the hovering link
 
-### Inline Mode
+### Macro Mode
 
-Typically, user will use slash command to create a embedded `iframe` to replace the URL in the block:
+Typically, user will use slash command to create a custom renderer Marco `:linkpreview` with the URL as the argument
 
 ```html
-<iframe
-  data-url="https://twitter.com/pengx17/status/1428025254144880645"
-  src="file:///Users/username/Documents/GitHub/logseq-plugin-link-preview/dist/index.html"
-></iframe>
+{{renderer :linkpreview,https://google.com}}
 ```
 
-The entry `src` is exactly the same resource that is being used for hovering mode, where the `data-url` will be used for fetching the link metadata.
-
-Similar to Hovering Mode, we need to fetch the link metadata first.
-Once the api returns with the link metadata (e.g., title, description, image), the plugin will
-
-- render them in the plugin iframe
-- resize the iframe (do not need to move its position this time)
+When it is rendered, the `logseq.App.onMacroRendererSlotted` hook will fetch the link information from the API server and render it with `ReactDomServer.renderToString` method into the slot. The plugin will register the styles into the global context.

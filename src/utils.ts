@@ -1,3 +1,4 @@
+import React from "react";
 import { LinkPreviewMetadata } from "./use-link-preview-metadata";
 
 export const isInlineMode = () => {
@@ -41,3 +42,24 @@ export function debounce<T = void>(fn: (t: T) => void, delay: number) {
     }, delay);
   };
 }
+
+// Makes sure the user will not lose focus (editing state) when previewing a link
+export const usePreventFocus = () => {
+  React.useEffect(() => {
+    let timer = 0;
+    const listener = () => {
+      setTimeout(() => {
+        if (window.document.hasFocus()) {
+          (top as any).focus();
+          logseq.Editor.restoreEditingCursor();
+        }
+      });
+    };
+    timer = setInterval(listener, 1000);
+    window.addEventListener("focus", listener);
+    return () => {
+      window.removeEventListener("focus", listener);
+      clearInterval(timer);
+    };
+  }, []);
+};
